@@ -3,74 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spiele mit Lizenz</title>
+<title>Hauptseite mit Schlüssel</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         text-align: center;
-        padding: 50px;
         background-color: #f0f0f0;
+        padding: 50px;
     }
     input, button {
         font-size: 18px;
         padding: 10px;
         margin: 10px;
     }
-    iframe {
-        margin: 20px auto;
+    /* Overlay-Fenster */
+    #popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 850px;
+        height: 600px;
+        background-color: white;
+        border: 3px solid #1a0dab;
+        border-radius: 10px;
+        z-index: 1000;
+        overflow: auto;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    #popup iframe {
+        width: 800px;
+        height: 450px;
+        margin: 10px auto;
+        display: block;
         border: 2px solid #1a0dab;
         border-radius: 8px;
-        display: block;
     }
-    .seite {
+    #overlay-bg {
         display: none;
+        position: fixed;
+        top:0; left:0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 500;
+    }
+    #close-btn {
+        margin-top: 10px;
+        padding: 5px 15px;
+        font-size: 16px;
     }
 </style>
 </head>
 <body>
 
-<!-- Seite 1: Zugang -->
-<div id="seite1" class="seite" style="display:block;">
-    <h1>Willkommen! Bitte Lizenzschlüssel eingeben</h1>
-    <input type="text" id="lizenzKey" placeholder="Lizenzschlüssel">
-    <button onclick="pruefeKey()">Zugang</button>
-</div>
+<h1>Willkommen! Bitte Lizenzschlüssel eingeben</h1>
+<input type="text" id="lizenzKey" placeholder="Lizenzschlüssel">
+<button onclick="openPopup()">Zugang</button>
 
-<!-- Seite 2: Spielebereich -->
-<div id="seite2" class="seite">
-    <h1>Hier sind deine Spiele!</h1>
+<!-- Hintergrund Overlay -->
+<div id="overlay-bg"></div>
 
-    <!-- Spiel 1 -->
-    <iframe src="https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-        frameborder="0" width="800" height="450"></iframe>
-
-    <!-- Spiel 2 -->
-    <iframe src="https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-        frameborder="0" width="800" height="450"></iframe>
-
-    <!-- Spiel 3 -->
-    <iframe src="https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-        frameborder="0" width="800" height="450"></iframe>
-
-    <!-- Spiel 4 -->
-    <iframe src="https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-        frameborder="0" width="800" height="450"></iframe>
+<!-- Popup-Fenster -->
+<div id="popup">
+    <h2>Hier sind deine Spiele!</h2>
+    <iframe src="https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4" allow="fullscreen; autoplay;"></iframe>
+    <iframe src="https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4" allow="fullscreen; autoplay;"></iframe>
+    <iframe src="https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4" allow="fullscreen; autoplay;"></iframe>
+    <iframe src="https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4" allow="fullscreen; autoplay;"></iframe>
+    <button id="close-btn" onclick="closePopup()">Schließen</button>
 </div>
 
 <script>
-function pruefeKey() {
+function openPopup() {
     const key = document.getElementById('lizenzKey').value;
     if(key === '1234') {
-        // Seite 1 ausblenden, Seite 2 einblenden
-        document.getElementById('seite1').style.display = 'none';
-        document.getElementById('seite2').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay-bg').style.display = 'block';
     } else {
-        alert("Ungültiger Schlüssel!");
+        alert('Ungültiger Schlüssel!');
     }
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay-bg').style.display = 'none';
 }
 </script>
 
