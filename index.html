@@ -1,77 +1,78 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Spiele-Webseite</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #333;
-        }
-        iframe {
-            margin: 20px auto;
-            border: 2px solid #1a0dab;
-            border-radius: 8px;
-            display: block;
-        }
-        .spiel-container {
-            margin-top: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiele mit Lizenz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background-color: #f0f0f0;
+    }
+    input, button {
+        font-size: 18px;
+        padding: 10px;
+        margin: 10px;
+    }
+    iframe {
+        margin: 20px auto;
+        border: 2px solid #1a0dab;
+        border-radius: 8px;
+        display: block;
+    }
+    .seite {
+        display: none;
+    }
+</style>
 </head>
 <body>
-    <h1>Willkommen auf meiner Spiele-Webseite!</h1>
-    <p>Klicke auf ein Spiel und gib den Lizenzschlüssel ein, um zu starten:</p>
+
+<!-- Seite 1: Zugang -->
+<div id="seite1" class="seite" style="display:block;">
+    <h1>Willkommen! Bitte Lizenzschlüssel eingeben</h1>
+    <input type="text" id="lizenzKey" placeholder="Lizenzschlüssel">
+    <button onclick="pruefeKey()">Zugang</button>
+</div>
+
+<!-- Seite 2: Spielebereich -->
+<div id="seite2" class="seite">
+    <h1>Hier sind deine Spiele!</h1>
 
     <!-- Spiel 1 -->
-    <button onclick="ladeSpiel('spiel1', 'KEY123')">Rooftop Run starten</button>
-    <div id="spiel1" class="spiel-container" style="display:none;"></div>
+    <iframe src="https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
+        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
+        frameborder="0" width="800" height="450"></iframe>
 
     <!-- Spiel 2 -->
-    <button onclick="ladeSpiel('spiel2', 'KEY456')">TB World starten</button>
-    <div id="spiel2" class="spiel-container" style="display:none;"></div>
+    <iframe src="https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
+        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
+        frameborder="0" width="800" height="450"></iframe>
 
     <!-- Spiel 3 -->
-    <button onclick="ladeSpiel('spiel3', 'KEY789')">Cooking Empire starten</button>
-    <div id="spiel3" class="spiel-container" style="display:none;"></div>
+    <iframe src="https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
+        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
+        frameborder="0" width="800" height="450"></iframe>
 
     <!-- Spiel 4 -->
-    <button onclick="ladeSpiel('spiel4', 'KEY321')">Meme Beatdown starten</button>
-    <div id="spiel4" class="spiel-container" style="display:none;"></div>
+    <iframe src="https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
+        allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
+        frameborder="0" width="800" height="450"></iframe>
+</div>
 
-    <script>
-        function ladeSpiel(spielId, key) {
-            const userKey = prompt("Bitte Lizenzschlüssel eingeben:");
-            if (userKey === key) {
-                let iframeSrc = "";
-                switch(spielId) {
-                    case 'spiel1':
-                        iframeSrc = "https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
-                        break;
-                    case 'spiel2':
-                        iframeSrc = "https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
-                        break;
-                    case 'spiel3':
-                        iframeSrc = "https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
-                        break;
-                    case 'spiel4':
-                        iframeSrc = "https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
-                        break;
-                }
-                document.getElementById(spielId).innerHTML = `<iframe src="${iframeSrc}" 
-                    allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-                    frameborder="0" width="800" height="450"></iframe>`;
-                document.getElementById(spielId).style.display = "block";
-            } else {
-                alert("Ungültiger Lizenzschlüssel!");
-            }
-        }
-    </script>
+<script>
+function pruefeKey() {
+    const key = document.getElementById('lizenzKey').value;
+    if(key === '1234') {
+        // Seite 1 ausblenden, Seite 2 einblenden
+        document.getElementById('seite1').style.display = 'none';
+        document.getElementById('seite2').style.display = 'block';
+    } else {
+        alert("Ungültiger Schlüssel!");
+    }
+}
+</script>
+
 </body>
 </html>
