@@ -20,31 +20,58 @@
             border-radius: 8px;
             display: block;
         }
+        .spiel-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Willkommen auf meiner Spiele-Webseite!</h1>
-    <p>Hier kannst du direkt Spiele spielen:</p>
+    <p>Klicke auf ein Spiel und gib den Lizenzschlüssel ein, um zu starten:</p>
 
     <!-- Spiel 1 -->
-    <iframe src="https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-            allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-            frameborder="0" width="800" height="450"></iframe>
+    <button onclick="ladeSpiel('spiel1', 'KEY123')">Rooftop Run starten</button>
+    <div id="spiel1" class="spiel-container" style="display:none;"></div>
 
     <!-- Spiel 2 -->
-    <iframe src="https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-            allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-            frameborder="0" width="800" height="450"></iframe>
+    <button onclick="ladeSpiel('spiel2', 'KEY456')">TB World starten</button>
+    <div id="spiel2" class="spiel-container" style="display:none;"></div>
 
     <!-- Spiel 3 -->
-    <iframe src="https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-            allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-            frameborder="0" width="800" height="450"></iframe>
+    <button onclick="ladeSpiel('spiel3', 'KEY789')">Cooking Empire starten</button>
+    <div id="spiel3" class="spiel-container" style="display:none;"></div>
 
     <!-- Spiel 4 -->
-    <iframe src="https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4"
-            allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
-            frameborder="0" width="800" height="450"></iframe>
+    <button onclick="ladeSpiel('spiel4', 'KEY321')">Meme Beatdown starten</button>
+    <div id="spiel4" class="spiel-container" style="display:none;"></div>
 
+    <script>
+        function ladeSpiel(spielId, key) {
+            const userKey = prompt("Bitte Lizenzschlüssel eingeben:");
+            if (userKey === key) {
+                let iframeSrc = "";
+                switch(spielId) {
+                    case 'spiel1':
+                        iframeSrc = "https://playgama.com/export/game/rooftop-run?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
+                        break;
+                    case 'spiel2':
+                        iframeSrc = "https://playgama.com/export/game/tb-world?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
+                        break;
+                    case 'spiel3':
+                        iframeSrc = "https://playgama.com/export/game/cooking-empire?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
+                        break;
+                    case 'spiel4':
+                        iframeSrc = "https://playgama.com/export/game/meme-beatdown?clid=p_871e0faf-84d0-4f04-9763-588bd2ced4a4";
+                        break;
+                }
+                document.getElementById(spielId).innerHTML = `<iframe src="${iframeSrc}" 
+                    allow="fullscreen; accelerometer; camera; clipboard-read; clipboard-write; screen-wake-lock; speaker-selection; web-share; geolocation; gyroscope; microphone; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture; payment; publickey-credentials-get; publickey-credentials-create; storage-access; attribution-reporting; browsing-topics"
+                    frameborder="0" width="800" height="450"></iframe>`;
+                document.getElementById(spielId).style.display = "block";
+            } else {
+                alert("Ungültiger Lizenzschlüssel!");
+            }
+        }
+    </script>
 </body>
 </html>
